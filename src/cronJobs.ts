@@ -76,25 +76,25 @@ export const scheduleJobs = () => {
       console.log(
         "2============getSnapHodlConfigTradingVolumeBalance=============="
       );
-      // await Promise.all(
-      //   snapHodlConfigs.map(getSnapHodlConfigTradingVolumeBalance)
-      // );
-      // console.log("3============processStakingContractDataItem=============");
-      // // Start processing uniqueStakingContractDataItems concurrently
-      // await Promise.all(
-      //   uniqueStakingContractDataItems.map((item) =>
-      //     processStakingContractDataItem(
-      //       item,
-      //       DB_NAME!,
-      //       DB_COLLECTION_STAKING_SNAPSHOT!,
-      //       DB_CONNECTION_STRING!,
-      //       APP_NAME!
-      //     )
-      //   )
-      // );
-      // console.log("4========getSnapHodlConfigBalance============");
-      // // After processStakingContractDataItem function calls
-      // await Promise.all(snapHodlConfigs.map(getSnapHodlConfigBalance));
+      await Promise.all(
+        snapHodlConfigs.map(getSnapHodlConfigTradingVolumeBalance)
+      );
+      console.log("3============processStakingContractDataItem=============");
+      // Start processing uniqueStakingContractDataItems concurrently
+      await Promise.all(
+        uniqueStakingContractDataItems.map((item) =>
+          processStakingContractDataItem(
+            item,
+            DB_NAME!,
+            DB_COLLECTION_STAKING_SNAPSHOT!,
+            DB_CONNECTION_STRING!,
+            APP_NAME!
+          )
+        )
+      );
+      console.log("4========getSnapHodlConfigBalance============");
+      // After processStakingContractDataItem function calls
+      await Promise.all(snapHodlConfigs.map(getSnapHodlConfigBalance));
       console.log("5=========Reward=========");
       // sum the volume of user and their reward
       await Promise.all(
